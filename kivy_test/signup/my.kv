@@ -1,0 +1,341 @@
+<SignUpWindow>:
+    name: "create"
+
+    namee: namee
+    email: email
+    password: passw
+    role: role_spinner
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Create an Account"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.12
+                id: namee
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Email: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13}
+                size_hint: 0.4, 0.12
+                id: email
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Password: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: passw
+                multiline: False
+                password: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+            Spinner:
+                pos_hint: {"x":0.2, "top":0.8-0.13*3}
+                size_hint: 0.6, 0.1
+                id: role_spinner
+                text: "Select your Role"
+                values: ["Student", "Class Representative","Teacher","Foreman", "Driver"]
+                on_text: root.role_spinner_clicked(role_spinner.text)
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.2}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Already have an Account? Log In"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.login()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.10
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.submit()
+
+
+<LoginWindow>:
+    name: "login"
+
+    email: email
+    password: password
+
+    FloatLayout:
+
+        Label:
+            text:"Email: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.9}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: email
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.9}
+            size_hint: 0.4, 0.15
+
+        Label:
+            text:"Password: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.7}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: password
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.7}
+            size_hint: 0.4, 0.15
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.2
+            font_size: (root.width**2 + root.height**2) / 13**4
+            text: "Login"
+            on_release:
+                root.manager.transition.direction = "up"
+                root.loginBtn()
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.3}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Don't have an Account? Create One"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.createBtn()
+
+
+<ProfileWindow>:
+    n: n
+    email: email
+    role: role
+    created:created
+
+    FloatLayout:
+        Button:
+            id: back
+            text: "<"
+            pos_hint: {"x":0.1, "top":1}
+            size_hint: 0.1,0.1
+            on_release:
+                app.root.current = "lain"
+                root.manager.transition.direction = "up"
+        Label:
+            id: n
+            pos_hint:{"x": 0.1, "top":0.9}
+            size_hint:0.8, 0.2
+            text: "Account Name: "
+
+        Label:
+            id: email
+            pos_hint:{"x": 0.1, "top":0.8}
+            size_hint:0.8, 0.2
+            text: "Email: "
+
+        Label:
+            id: created
+            pos_hint:{"x": 0.1, "top":0.7}
+            size_hint:0.8, 0.2
+            text: "Created: "
+
+        Label:
+            id: role
+            pos_hint:{"x": 0.1, "top":0.6}
+            size_hint:0.8, 0.2
+            text: "Role: "
+
+        Button:
+            pos_hint:{"x":0.2, "y": 0.1}
+            size_hint:0.6,0.2
+            text: "Log Out"
+            on_release:
+                app.root.current = "login"
+                root.manager.transition.direction = "down"
+
+<MainWindow>:
+    toLogin: toLogin
+
+    FloatLayout:
+        Label:
+            pos_hint: {"x":0.1, "top": 1}
+            size_hint: 0.5,0.1
+            background_color: 0,.5,1,1
+            text: "NSTU SOTS"
+
+        Button:
+            id: toLogin
+            pos_hint: {"x":0.7, "top": 1}
+            size_hint: 0.25,0.1
+            background_color: 0,1,1,1
+            text: "user"
+            on_release:
+                app.root.current = "profile"
+                root.manager.transition.direction = "down"
+
+        Button:
+            pos_hint: {"x":0.05, "top": 0.8}
+            size_hint: 0.4,0.3
+            id: busSched
+            text: "Bus Schedule"
+            on_release:
+                app.root.current = "busSched"
+                root.manager.transition.direction = "left"
+
+        Button:
+            pos_hint: {"x":0.55, "top": 0.8}
+            size_hint: 0.4,0.3
+            id: addPersonalEntry
+            text: "Add Your Entry"
+            on_release:
+                app.root.current = "pEntry"
+                root.manager.transition.direction = "left"
+
+        Button:
+            pos_hint: {"x":0.05, "top": 0.4}
+            size_hint: 0.4,0.3
+            id: addClassEntry
+            text: "Add your class's Entry"
+            on_release:
+                root.onClick()
+                root.manager.transition.direction = "left"
+
+        Button:
+            pos_hint: {"x":0.55, "top": 0.4}
+            size_hint: 0.4,0.3
+            id: busLocate
+            text: "Find your Bus's Location"
+            on_release:
+                root.onClick()
+                root.manager.transition.direction = "left"
+
+
+<busSched>:
+
+
+    FloatLayout:
+
+        Button:
+            id: back
+            text: "<"
+            pos_hint: {"x":0.03, "top":1}
+            size_hint: 0.1,0.1
+            on_release:
+                app.root.current = "lain"
+                root.manager.transition.direction = "right"
+        Label:
+            pos_hint: {"x":0.3, "top": 1}
+            size_hint: 0.5,0.1
+            background_color: 0,.5,1,1
+            text: "Bus Schedule"
+
+        Label:
+            pos_hint: {"x":0.25, "top": 0.93}
+            size_hint: 0.5,0.1
+            background_color: 0,.5,1,1
+            text: "From Maijdee to Campus"
+
+        ScrollView:
+            pos_hint: {"x":0.05, "top": 0.84}
+            size_hint: 0.9, 0.35
+
+            GridLayout:
+                id: scroll
+                cols: 1
+                spacing: 5
+                size_hint_y: None
+                row_force_default: True
+                row_default_height: 30
+        Label:
+            pos_hint: {"x":0.25, "top": 0.5}
+            size_hint: 0.5,0.1
+            background_color: 0,.5,1,1
+            text: "From Campus to Maijdee"
+
+        ScrollView:
+            pos_hint: {"x":0.05, "top": 0.4}
+            size_hint: 0.9, 0.35
+            GridLayout:
+                id: scroll1
+                cols: 1
+                spacing: 5
+                size_hint_y: None
+                row_force_default: True
+                row_default_height: 30
+
+<PersonalEntry>:
+    FloatLayout:
+        Button:
+            id: back
+            text: "<"
+            pos_hint: {"x":0.1, "top":1}
+            size_hint: 0.1,0.1
+            on_release:
+                app.root.current = "lain"
+                root.manager.transition.direction = "right"
+        Label:
+            pos_hint: {"x":0.1, "top": 1}
+            size_hint: 0.5,0.1
+            background_color: 0,.5,1,1
+            text: "Personal Entry"
+        Label:
+            pos_hint: {"x":0.1, "top":0.8}
+            size_hint: 0.35, 0.15
+            text: "Select the time you want to go to University"
+        Spinner:
+            pos_hint: {"x":0.5, "top":0.8}
+            size_hint: 0.35, 0.15
+            id: time_select_versity
+            text: "Select Time"
+            values: ["7.00 AM", "8.00 AM", "9.00 AM", "9.30 AM", "12.00 PM", "1.00 PM", "7.00 PM"]
+        Label:
+            pos_hint: {"x":0.1, "top":0.5}
+            size_hint: 0.35, 0.15
+            text: "Select the time you want to go back"
+        Spinner:
+            pos_hint: {"x":0.5, "top":0.5}
+            size_hint: 0.35, 0.15
+            id:time_select_maijdee
+            text: "Select Time"
+            values: ["1.00 PM", "2.00 PM", "3.00 PM", "4.00 PM", "5.00 PM", "6.00 PM", "7.00 PM"]
+
+        Button:
+            pos_hint: {"x":0.25, "top":0.2}
+            size_hint: 0.35, 0.15
+            id: submit_time
+            text: "Submit"
+            on_release:
+                root.submit()
+
